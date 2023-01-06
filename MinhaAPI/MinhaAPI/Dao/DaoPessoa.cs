@@ -15,9 +15,9 @@ namespace MinhaAPI.Dao
             using (SqlConnection conn = new SqlConnection(conexao))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Pessoa", conn))
+                using (SqlCommand cmd = new SqlCommand("GetPessoas", conn))
                 {
-                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandType = CommandType.StoredProcedure;
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -43,9 +43,9 @@ namespace MinhaAPI.Dao
             using (SqlConnection conn = new SqlConnection(conexao))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Pessoa (Nome, Email) VALUES (@NOME, @EMAIL)", conn))
+                using (SqlCommand cmd = new SqlCommand("InserirPessoas", conn))
                 {
-                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@NOME", pessoa.Nome);
                     cmd.Parameters.AddWithValue("@EMAIL", pessoa.Email);
                     cmd.ExecuteNonQuery();
